@@ -123,6 +123,76 @@ this 指向监听器所在的dom元素
 
 
 
+## promise
+Promise 
+异步编程解决方案
+1.三种状态
+pending/fulfilled/rejected
+
+pending -> fulfilled  
+pending -> rejected
+
+ new Promise(function(resolve, reject) {
+  // ... some code
+
+  if (/* 异步操作成功 */){
+    resolve(value); //
+  } else {
+    reject(error);
+  }
+});
+
+异步操作成功时调用resolve
+异步操作失败，调用reject
+
+2. 可以用then方法分别指定resolved状态和rejected状态的回调函数。
+promise.then(function(value) {
+  // success
+}, function(error) {
+  // failure
+});
+
+3.catch 用于指定发生错误时的回调函数
+getJSON('/posts.json').then(function(posts) {
+  // ...
+}).catch(function(error) {
+  // 处理 getJSON 和 前一个回调函数运行时发生的错误
+  console.log('发生错误！', error);
+});
+
+4.finally：不管promise对象最后状态如何，都会执行的操作
+promise
+.then(result => {···})
+.catch(error => {···})
+.finally(() => {···});
+
+5. promise.all
+let p=promise.all([p1,p2]) 
+p的状态有p1和p2决定：
+p1,p2都是fulfilled，p状态会变成fulfilled
+p1,p2中有一个被rejected，p状态会变成rejected
+ 
+promise
+.then(result => {···})
+.catch(error => {···})
+.finally(() => {···});
+
+6. promise.race
+const p = Promise.race([p1, p2, p3]);
+
+p1,p2,p3有一个状态改变，p的状态就会跟着改变。
+
+
+7.promise.resolve()
+const p=Promise.resolve('done');
+等同于
+const p=new Promise((resolve,reject)=>resolve('done'))
+
+8.promise.reject()
+const p = Promise.reject('出错了');
+// 等同于
+const p = new Promise((resolve, reject) => reject('出错了'))
+
 
 
 

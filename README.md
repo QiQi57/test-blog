@@ -258,6 +258,48 @@ async 函数与 promise，generator 函数的比较
 async函数 的实现最简洁，最符合语义，几乎没有语义不相关的代码。
 
 
+## es6 vs es5
+es5继承：
+先创建子类，然后把父类的方法添加到子类的原型上，
+
+function people(){
+    this.name="this is default name";
+    this.age="18";
+}
+people.prototype.getName=function(){
+    return this.name;
+}
+
+function student(){
+    this.school="";
+}
+student.prototype=new people();
+student.constructor=student;
+var xiaoMing=new student();
+xiaoMing.getName();
+
+es6
+先将父类的方法添加到this，然后在this基础上添加方法
+class people{
+    constructor(){
+        this.name="this is default name";
+    }
+    getName(){
+        return this.name;
+    }
+}
+
+class student extends people{
+    constructor(prop){
+        super(prop);
+        this.school="middle school";
+    }
+}
+var xHong=new student();
+xHong.getName();
+
+
+
 
 
 

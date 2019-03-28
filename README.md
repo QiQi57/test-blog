@@ -194,5 +194,70 @@ const p = Promise.reject('出错了');
 const p = new Promise((resolve, reject) => reject('出错了'))
 
 
+## async 函数返回一个promise对象，可以使用then添加回调函数。
+当函数执行的时候，遇到await就会先返回，等待异步操作完成，再接着执行函数体内后面的语句。
+
+async 函数的实现原理，就是将 Generator 函数和自动执行器，包装在一个函数里。
+
+函数是对Generator函数的改进，和generator对比
+1.内置执行期
+2.更好的语义
+async   对应 *
+await   对应 yield
+3.更广的适应性
+yield后面只能是Thunk函数或promise对象，而async函数的await后面可以是promise对象或原始类型的值（会自动转成promise对象）
+
+4.返回值是promise
+async 函数返回的是promise对象，generator返回的是Iterator对象
+
+async function f() {
+  await new Promise(function (resolve, reject) {
+    throw new Error('出错了');
+  });
+}
+
+f()
+.then(v => console.log(v))
+.catch(e => console.log(e))
+// Error：出错了
+
+注意点：
+1.await 后面是promise对象，可能会返回rejected，错误异常处理
+
+async function myFunction() {
+  try {
+    await somethingThatReturnsAPromise();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// 另一种写法
+
+async function myFunction() {
+  await somethingThatReturnsAPromise()
+  .catch(function (err) {
+    console.log(err);
+  });
+}
+
+2.多个异步操作，同时触发
+// 写法一
+let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+
+// 写法二
+let fooPromise = getFoo();
+let barPromise = getBar();
+let foo = await fooPromise;
+let bar = await barPromise;
+
+
+3.await命令只能用在async函数之中，如果用在普通函数，就会报错
+
+async 函数与 promise，generator 函数的比较
+async函数 的实现最简洁，最符合语义，几乎没有语义不相关的代码。
+
+
+
 
 

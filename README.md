@@ -30,7 +30,33 @@ obj.c();
 var func = () => ({foo: 1});
 
 7.箭头函数在参数和箭头之间不能换行。
+8.箭头函数 不绑定this（es5中每个函数都有this），它只会从自己的作用域链的上一层继承this
+9.具体使用语法。。。
 
+es5中this问题：
+`function Person() {
+  var that = this;
+  that.age = 0;
+
+  setInterval(function growUp() {
+    //  回调引用的是`that`变量, 其值是预期的对象. 
+    that.age++;
+    console.log(that.age);
+  }, 1000);
+}`
+
+箭头函数解决this指向的问题
+`function Person(){
+  this.age = 0;
+
+  setInterval(() => {
+    this.age++; // |this| 正确地指向 p 实例
+    console.log(this.age);
+  }, 1000);
+}
+
+var p = new Person();
+`
 
 ## this
 this 知识点：

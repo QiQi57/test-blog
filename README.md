@@ -44,7 +44,8 @@ es5中this问题：
     that.age++;
     console.log(that.age);
   }, 1000);
-}```
+}
+```
 
 箭头函数解决this指向的问题
 ```function Person(){

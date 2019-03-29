@@ -34,7 +34,8 @@ var func = () => ({foo: 1});
 9.具体使用语法。。。
 
 es5中this问题：
-`function Person() {
+
+```function Person() {
   var that = this;
   that.age = 0;
 
@@ -43,10 +44,10 @@ es5中this问题：
     that.age++;
     console.log(that.age);
   }, 1000);
-}`
+}```
 
 箭头函数解决this指向的问题
-`function Person(){
+```function Person(){
   this.age = 0;
 
   setInterval(() => {
@@ -56,7 +57,7 @@ es5中this问题：
 }
 
 var p = new Person();
-`
+```
 
 ## this
 this 知识点：
